@@ -54,7 +54,7 @@ document.getElementById("target").innerHTML = html;
 </div>
 ```
 
-**JavaScript:*
+*JavaScript:*
 ```JS
 window.addEventListener('error', function(e) {            
     if (!e.error.isRazorError) return;
@@ -78,4 +78,4 @@ document.getElementById("target").innerHTML = html;
 
 
 ----------------
-More examples on [Razor-Express (RAZ) view template engine library](https://www.npmjs.com/package/raz).
+> More examples on [Razor-Express (RAZ) view template engine library](https://www.npmjs.com/package/raz).
