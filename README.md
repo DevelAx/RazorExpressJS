@@ -95,3 +95,7 @@ const html = raz.render(template, countries);
 document.getElementById("target").innerHTML = html;
 
 ```
+
+
+----------------
+More examples on [Razor-Express (RAZ) view template engine library](https://www.npmjs.com/package/raz).
