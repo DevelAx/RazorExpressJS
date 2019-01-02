@@ -1,0 +1,34 @@
+{
+  "name": "razorexpressjs",
+  "version": "1.0.0",
+  "description": "JS-version of the Razor-Express library (Razor-like template engine for NodeJS Express).",
+  "main": "raz.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevelAx/RazorExpressJS.git"
+  },
+  "author": {
+    "name": "Sergey F.",
+    "email": "develax@gmail.com",
+    "url": "https://www.npmjs.com/package/raz"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DevelAx/RazorExpressJS/issues"
+  },
+  "homepage": "https://github.com/DevelAx/RazorExpressJS#readme",
+  "keywords": [
+    "Razor",
+    "View",
+    "Template",
+    "Engine",
+    "JS",
+    "JavaScript",
+    "Browser",
+    "HTML",
+    "Parser"
+  ]
+}
