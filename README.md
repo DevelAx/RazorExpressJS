@@ -1,12 +1,11 @@
 # RazJS
-
-**JavaScript (browser) version** of the [Razor-Express (RAZ) view template engine library](https://www.npmjs.com/package/raz) (see the documentation there).
+## JavaScript (browser) version of the [Razor-Express (RAZ) view template engine library](https://www.npmjs.com/package/raz) (see the documentation there).
 
 >*Note:* debugging information of runtime code errors in the JS version is more stingy because the NodeJS virtual machine is not used in the browser. 
 
-## Examples
+### Examples
 
-### Example 1: rendering HTML with Razor syntax
+#### Example 1: rendering HTML with Razor syntax
 
 **HTML:**
 ```HTML
@@ -47,7 +46,7 @@ document.getElementById("target").innerHTML = html;
 ```
 <sup>^ Try it on [jsfiddle.net](https://jsfiddle.net/develax/tfr9zhm5/)</sup>
 
-### Example 2: handling and displaying errors
+#### Example 2: handling and displaying errors
 
 **HTML:**
 ```HTML
@@ -66,32 +65,13 @@ window.addEventListener('error', function(e) {
     }, 0);
 });
 
-const countries = [
- { name: "Russia", area: 17098242 },
- { name: "Canada", area: 9984670 },
- { name: "United States", area: 9826675 },
- { name: "China", area: 9596960 },
- { name: "Brazil", area: 8514877 },
- { name: "Australia", area: 7741220 },
- { name: "India", area: 3287263 }
-];
-
+const num = 1;
 const template = `
-<table>
-  <tr>
-    <th>Country</th>
-    <th>Area sq.km</td>
-  </tr>
-  @for(var i = 0; i < Model.length; i++){
-    var country = Model[i];
-    <tr>
-      <td>@country.name</td>
-      <td>@country.area</td>
-    </tr>
-  }
-</table>`;
+<div>
+ @Model
+</span>`;
 
-const html = raz.render(template, countries);
+const html = raz.render(template, num);
 document.getElementById("target").innerHTML = html;
 
 ```
