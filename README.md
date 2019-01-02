@@ -7,13 +7,13 @@
 
 #### Example 1: rendering HTML with Razor syntax
 
-**HTML:**
+*HTML:*
 ```HTML
 <div id="target">
 </div>
 ```
 
-**JavaScript:**
+*JavaScript:*
 ```JS
 const countries = [
  { name: "Russia", area: 17098242 },
@@ -48,13 +48,13 @@ document.getElementById("target").innerHTML = html;
 
 #### Example 2: handling and displaying errors
 
-**HTML:**
+*HTML:*
 ```HTML
 <div id="target">
 </div>
 ```
 
-**JavaScript:**
+**JavaScript:*
 ```JS
 window.addEventListener('error', function(e) {            
     if (!e.error.isRazorError) return;
