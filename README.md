@@ -185,6 +185,7 @@ document.getElementById("target").innerHTML = html;
 - Thursday
 - Friday
 - Saturday
+
 Today is _Thursday_.
 
 <sup>^ Try it on [jsfiddle.net](https://jsfiddle.net/develax/ub5os9hn/4/)</sup>
