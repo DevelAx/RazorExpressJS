@@ -58,14 +58,14 @@ document.getElementById("target").innerHTML = html;
 
 *JavaScript:*
 ```JS
-window.addEventListener('error', function(e) {            
-    if (!e.error.isRazorError) return;
-    e.preventDefault(); // stop propagating
-
-    setTimeout(()=>{
-        document.documentElement.innerHTML = e.error.html();
-    }, 0);
-});
+window.addEventListener('error', function (e) {
+     if (!e.error.isRazorError) return;
+     setTimeout(() => {
+         // The document have to be fully loaded before replacing its whole content - that's why we use timer.
+         document.documentElement.innerHTML = e.error.html();
+     }, 0);
+     e.preventDefault(); // Stop propagating since we've handled it.
+ });
 
 const num = 1;
 const template = `
