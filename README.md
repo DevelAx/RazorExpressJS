@@ -80,4 +80,4 @@ document.getElementById("target").innerHTML = html;
 
 
 ----------------
-> More examples on [Razor-Express (RAZ) view template engine library](https://www.npmjs.com/package/raz).
+> More syntax construction examples on [Razor-Express syntax reference for NodeJS & Express](https://github.com/DevelAx/RazorExpress/blob/master/docs/syntax.md).
