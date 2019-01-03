@@ -1,6 +1,6 @@
 {
   "name": "razjs",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "JS-version of the Razor-Express library (Razor-like template engine for NodeJS Express).",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
