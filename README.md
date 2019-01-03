@@ -60,7 +60,7 @@ document.getElementById("target").innerHTML = html;
 ```JS
 window.addEventListener('error', function(e) {            
     if (!e.error.isRazorError) return;
-    e.preventDefault(); // stop propagating to JsDom virtual-console.
+    e.preventDefault(); // stop propagating
 
     setTimeout(()=>{
         document.documentElement.innerHTML = e.error.html();
