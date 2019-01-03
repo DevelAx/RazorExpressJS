@@ -11,6 +11,7 @@
 
 *HTML:*
 ```HTML
+<script src="node_modules/razjs/raz.js"></script>
 <div id="target">
 </div>
 ```
@@ -52,6 +53,7 @@ document.getElementById("target").innerHTML = html;
 
 *HTML:*
 ```HTML
+<script src="node_modules/razjs/raz.js"></script>
 <div id="target">
 </div>
 ```
@@ -78,6 +80,65 @@ document.getElementById("target").innerHTML = html;
 
 ```
 
+#### Example 3 
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RazJS library test - #1</title>
+    <style>
+        pre { 
+            background-color:black; 
+            color:#f3eeb5; 
+            padding: 0 0.5rem; 
+            border: 1rem ridge #ababab;
+        }
+    </style>
+    <script src="node_modules/razjs/raz.js"></script>
+    <script type="text/javascript">
+        function test() {
+            var template = `
+<h1>@Model.title</h1>
+<strong>Days of the week:</strong>
+<ul>
+    @for (var i = 0; i < Model.days.length; i++) {
+        <li>@Model.days[i]</li>
+    }
+</ul>
+<div>Today is <i>@Model.today()</i>.</div>
+<br />
+<hr />
+<div>
+    <h2>The Razor-syntax template used in this example</h2>
+    <pre>
+        @Model.template
+    </pre>
+</div>`;
+            var model = {
+                title: document.title,
+                day: new Date().getDay(),
+                days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                today: function () {
+                    return this.days[this.day];
+                },
+                template
+            }
+            document.body.insertAdjacentHTML('afterbegin', raz.render(template, model));
+        }
+    </script>
+</head>
+
+<body onload="test()">
+</body>
+
+</html>
+```
+<sup>^ Try it on [jsfiddle.net](https://jsfiddle.net/develax/ub5os9hn/4/)</sup>
 
 ----------------
 > More syntax construction examples on [Razor-Express syntax reference for NodeJS & Express](https://github.com/DevelAx/RazorExpress/blob/master/docs/syntax.md).
