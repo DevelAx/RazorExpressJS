@@ -122,7 +122,7 @@ document.getElementById("target").innerHTML = html;
 
 <sup>^ This code is available in the [RazJsExample](https://github.com/DevelAx/RazJsExample) repository.</sup>
 
-#### Example 3 (the entire HTML-page with JavaScript embedded)
+#### Example 3 (the entire HTML-page with embedded JavaScript)
 
 ```HTML
 <!DOCTYPE html>
