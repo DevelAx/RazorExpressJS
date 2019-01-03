@@ -80,7 +80,7 @@ document.getElementById("target").innerHTML = html;
 
 ```
 
-#### Example 3 
+#### Example 3 (the entire HTML-page with JavaScript embedded)
 
 ```HTML
 <!DOCTYPE html>
