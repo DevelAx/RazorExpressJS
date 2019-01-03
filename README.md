@@ -47,6 +47,43 @@ const html = raz.render(template, countries);
 document.getElementById("target").innerHTML = html;
 
 ```
+*HTML output:*
+<pre>
+<table>
+  <tbody><tr>
+    <th>Country</th>
+    <th>Area sq.km</th>
+  </tr>
+    <tr>
+      <td>Russia</td>
+      <td>17098242</td>
+    </tr>
+    <tr>
+      <td>Canada</td>
+      <td>9984670</td>
+    </tr>
+    <tr>
+      <td>United States</td>
+      <td>9826675</td>
+    </tr>
+    <tr>
+      <td>China</td>
+      <td>9596960</td>
+    </tr>
+    <tr>
+      <td>Brazil</td>
+      <td>8514877</td>
+    </tr>
+    <tr>
+      <td>Australia</td>
+      <td>7741220</td>
+    </tr>
+    <tr>
+      <td>India</td>
+      <td>3287263</td>
+    </tr>
+</tbody></table>
+</pre>
 <sup>^ Try it on [jsfiddle.net](https://jsfiddle.net/develax/tfr9zhm5/)</sup>
 
 #### Example 2: handling and displaying errors
@@ -138,6 +175,18 @@ document.getElementById("target").innerHTML = html;
 
 </html>
 ```
+*HTML output:*
+
+**Days of the week:**
+ - Sunday
+- Monday
+- Tuesday
+- Wednesday
+- Thursday
+- Friday
+- Saturday
+Today is _Thursday_.
+
 <sup>^ Try it on [jsfiddle.net](https://jsfiddle.net/develax/ub5os9hn/4/)</sup>
 
 ----------------
