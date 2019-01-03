@@ -1,8 +1,7 @@
 {
-  "name": "razorexpressjs",
-  "version": "1.0.0",
+  "name": "razjs",
+  "version": "0.0.1",
   "description": "JS-version of the Razor-Express library (Razor-like template engine for NodeJS Express).",
-  "main": "raz.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +12,7 @@
   "author": {
     "name": "Sergey F.",
     "email": "develax@gmail.com",
-    "url": "https://www.npmjs.com/package/raz"
+    "url": "https://www.npmjs.com/package/razjs"
   },
   "license": "MIT",
   "bugs": {
