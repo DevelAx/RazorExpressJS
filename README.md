@@ -116,6 +116,7 @@ const html = raz.render(template, num);
 document.getElementById("target").innerHTML = html;
 
 ```
+<sup>^ This code is available in the [RazJsExample repository](https://github.com/DevelAx/RazJsExample)</sup>
 
 #### Example 3 (the entire HTML-page with JavaScript embedded)
 
@@ -188,7 +189,7 @@ document.getElementById("target").innerHTML = html;
 
 Today is _Thursday_.
 
-<sup>^ Try it on [jsfiddle.net](https://jsfiddle.net/develax/ub5os9hn/4/)</sup>
+<sup>^ Try it on [jsfiddle.net](https://jsfiddle.net/develax/ub5os9hn/4/) or the [RazJsExample repository](https://github.com/DevelAx/RazJsExample)</sup>
 
 ----------------
 > More syntax construction examples on [Razor-Express syntax reference for NodeJS & Express](https://github.com/DevelAx/RazorExpress/blob/master/docs/syntax.md).
