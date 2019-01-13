@@ -98,21 +98,16 @@ document.getElementById("target").innerHTML = html;
 *JavaScript:*
 ```JS
 window.addEventListener('error', function (e) {
-     if (!e.error.isRazorError) return;
-     setTimeout(() => {
-         // The document have to be fully loaded before replacing its whole content - that's why we use timer.
-         document.documentElement.innerHTML = e.error.html();
-     }, 0);
-     e.preventDefault(); // Stop propagating since we've handled it.
- });
+    setTimeout(() => {
+        // The document have to be fully loaded before replacing its whole content - that's why we use timer.
+        document.documentElement.innerHTML = (e.error.isRazorError) ? e.error.html() : e.error.toString();
+    }, 0);
+    e.preventDefault(); // Stop propagating since we've handled it.
+});
 
-const num = 1;
-const template = `
-<div>
- @Model
-</span>`;
-
-const html = raz.render(template, num);
+const model = 1;
+const template = "<span>@Model</span>";
+const html = raz.render(template, model);
 document.getElementById("target").innerHTML = html;
 
 ```
