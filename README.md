@@ -106,7 +106,7 @@ window.addEventListener('error', function (e) {
 });
 
 const model = 1;
-const template = "<span>@Model</span>";
+const template = "<div>@Model</span>";
 const html = raz.render(template, model);
 document.getElementById("target").innerHTML = html;
 
