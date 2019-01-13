@@ -118,7 +118,7 @@ document.getElementById("target").innerHTML = html;
 ```
 *Rendered HTML:*
 
-![Visualization of Razor-Express error through views chain](https://github.com/DevelAx/RazDoc/blob/master/RazJS/catch-error-example.png?raw=true)
+![RazJS error example](https://github.com/DevelAx/RazDoc/blob/master/RazJS/catch-error-example.png?raw=true)
 
 <sup>^ This code is available in the [RazJsExample](https://github.com/DevelAx/RazJsExample) repository.</sup>
 
