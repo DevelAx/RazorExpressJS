@@ -453,7 +453,7 @@ class ParserErrorFactory {
     }
 
     sectionsAlreadyRendered(sectionName, renderedBy, attemptedBy) {
-        var message = `Sections named '${sectionName}' have already been rendered by '${renderedBy}'. There is an atempt to rendered it again by '${attemptedBy}'.`;
+        var message = `Sections named '${sectionName}' has already been rendered by '${renderedBy}'. There is an atempt to rendered it again by '${attemptedBy}'.`;
         return RazorError.new({ message, info: this.info, capture: this.sectionsAlreadyRendered });
     }
 
@@ -823,28 +823,54 @@ module.exports = require("./errors.en");
 'use strict';
 require('./utils');
 
-function compilePageSync(Html, Model, ViewData, debug) {
-    'use strict';
+function compilePageSync(html, model, viewData, scope, isDebugMode) {
+    if (isDebugMode) {
+        let sandbox = html._sandbox;
+        let vm = html._vm;
 
-    if (debug) {
-        let sandbox = Html._sandbox;
-        let vm = Html._vm;
-        sandbox.Html = Html;
-        sandbox.Model = Model;
-        sandbox.ViewData = ViewData;
-        vm.runInNewContext(Html._js, sandbox);
+        // Creates cope variables.
+        if (scope) {
+            Object.keys(scope).forEach((k) => {
+                defineConstant(sandbox, k, scope[k]);
+            });
+        }
+
+        defineConstant(sandbox, "Html", html);
+        defineConstant(sandbox, "Model", model);
+        defineConstant(sandbox, "ViewData", viewData);
+        defineConstant(sandbox, "debug", isDebugMode);
+        vm.runInNewContext(html._js, sandbox);
     }
     else {
-        eval(Html._js);
+        const argNames = ["Html", "Model", "ViewData", "debug"];
+        const argValues = [html, model, viewData, isDebugMode];
+
+        if (scope) {
+            // Add cope variables (we should but can't make them constants because of `eval` limitation in sctict-mode).
+            Object.keys(scope).forEach((k) => {
+                argNames.push(k);
+                argValues.push(scope[k]);
+            });
+        }
+
+        // Put the JS-scipt to be executed.
+        argNames.push(html._js);
+        // Execute JS-script via function with arguments.
+        Function.apply(undefined, argNames).apply(undefined, argValues);
     }
 
-    return;
+    function defineConstant(obj, name, value) {
+        Object.defineProperty(obj, name, {
+            value,
+            writable: false
+        });
+    }
 }
 
-function compilePage(Html, Model, ViewData, debug, done) {
+function compilePage(html, model, viewData, scope, isDebugMode, done) {
     try {
-        compilePageSync(Html, Model, ViewData, debug);
-        return Html.__renderLayout(done);
+        compilePageSync(html, model, viewData, scope, isDebugMode);
+        return html.__renderLayout(done);
     }
     catch (exc) {
         done(exc);
@@ -873,10 +899,11 @@ module.exports = function (opts) {
             vm.createContext(this._sandbox);
         }
 
+
         // function (process,...){...}() prevents [this] to exist for the 'vm.runInNewContext()' method
         this._js = `
+        'use strict';
 (function (process, window, global, module, compilePage, compilePageSync, undefined) { 
-    'use strict';
     delete Html._js;
     delete Html._vm;
     delete Html._sandbox;
@@ -907,6 +934,7 @@ module.exports = function (opts) {
                 args.er.isLayout = false;
                 if (err) return done(err);
                 let compileOpt = {
+                    scope: args.scope,
                     template: result.data,
                     filePath: result.filePath,
                     model: args.model,
@@ -1003,6 +1031,7 @@ module.exports = function (opts) {
 
         this.getPartial = function (viewName, viewModel) {
             let compileOpt = {
+                scope: args.scope,
                 model: viewModel || args.model, // if is not set explicitly, set default (parent) model
                 findPartial: args.findPartial,
                 findPartialSync: args.findPartialSync,
@@ -1120,7 +1149,6 @@ Html.__dbg.pos = null;`;
     //const _functionKeyword = "function";
     const blockType = { none: 0, html: 1, code: 2, expr: 3, section: 4 };
 
-    const RazorError = require('./errors/RazorError');
     const ErrorsFactory = require('./errors/errors');
     const voidTags = "area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr".toUpperCase().split("|").map(s => s.trim());
 
@@ -1146,7 +1174,7 @@ Html.__dbg.pos = null;`;
                 return error(exc);
             }
 
-            compilePage(htmlObj, this.args.model, this.args.viewData, debugMode, (err, html) => {
+            compilePage(htmlObj, this.args.model, this.args.viewData, this.args.scope, debugMode, (err, html) => {
                 if (err)
                     return error(err, htmlObj.__dbg);
 
@@ -1172,7 +1200,7 @@ Html.__dbg.pos = null;`;
                 log.debug();
                 var htmlArgs = {};
                 var html = this.getHtml(htmlArgs);
-                compilePageSync(html, this.args.model, this.args.viewData, debugMode);
+                compilePageSync(html, this.args.model, this.args.viewData, this.args.scope, debugMode);
                 this.checkSections();
             }
             catch (exc) {
@@ -1185,6 +1213,15 @@ Html.__dbg.pos = null;`;
 
         getHtml(htmlArgs) {
             log.debug(this.args.filePath);
+
+            // extract scope..
+            var model = this.args.model;
+
+            if (model && model.$) {
+                this.args.scope = model.$;
+                delete model.$;
+            }
+
             this.args.parsedSections = this.args.parsedSections || {};
             this.args.viewData = this.args.viewData || this.args.ViewData || {};
             this.args.partialsCache = this.args.partialsCache || {};
@@ -2275,10 +2312,7 @@ Html.__dbg.pos = null;`;
                 err.stack = err.stack.substring(pos + 1);
         }
 
-        // Is not "born" as RazorError.
-        let isNotRazorError = !err.__dbg && !err.isRazorError;
-
-        if (isNotRazorError || err.__dbg && err.__dbg.viewName !== (err.data && err.data.filename))
+        if (debugMode && !err.isRazorError || err.__dbg && err.__dbg.viewName !== (err.data && err.data.filename))
             errorFactory.extendError(err);
 
         return err;
@@ -2317,7 +2351,7 @@ Html.__dbg.pos = null;`;
 
 }; // module.export
 
-},{"./HtmlString":1,"./errors/RazorError":3,"./errors/errors":5,"./libs/js-htmlencode":6,"./utils":8}],8:[function(require,module,exports){
+},{"./HtmlString":1,"./errors/errors":5,"./libs/js-htmlencode":6,"./utils":8}],8:[function(require,module,exports){
 (function (global){
 ////////////////////////////////////////////////
 // String
