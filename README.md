@@ -113,6 +113,14 @@ document.getElementById("target").innerHTML = html;
 ```
 *Rendered HTML:*
 
+![RazJS error example](https://github.com/DevelAx/RazDoc/blob/master/RazJS/non-debug-mode-error.jpg?raw=true)
+
+The error information displayed above is quite stingy. To get more details turn `debug` mode on:
+
+```JS
+raz.debug = true;
+```
+
 ![RazJS error example](https://github.com/DevelAx/RazDoc/blob/master/RazJS/catch-error-example.png?raw=true)
 
 <sup>^ This code is available in the [RazJsExample](https://github.com/DevelAx/RazJsExample) repository.</sup>
