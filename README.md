@@ -121,6 +121,8 @@ The error information displayed above is quite stingy. To get more details turn 
 raz.debug = true;
 ```
 
+...and refresh the browser page:
+
 ![RazJS error example](https://github.com/DevelAx/RazDoc/blob/master/RazJS/catch-error-example.png?raw=true)
 
 <sup>^ This code is available in the [RazJsExample](https://github.com/DevelAx/RazJsExample) repository.</sup>
